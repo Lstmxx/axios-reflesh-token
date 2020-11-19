@@ -1,14 +1,15 @@
-# axios-reflesh-token
+# axios-refresh-token
 封装axios，支持刷新token
 
 install:
 ```
-npm install @lstmxx/axios-reflesh-token --save
+npm install @lstmxx/axios-refresh-token --save
 ```
 
 example:
 
 ```js
+import Service from '@lstmxx/axios-refresh-token'
 const options = {
   config: {
     baseURL: '',

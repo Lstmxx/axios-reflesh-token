@@ -10,17 +10,17 @@ export default {
   input: 'src/index.js',
   output: [
     {
-      file: 'lib/axios-reflash-token.cjs.js',
+      file: 'dist/axios-reflash-token.cjs.js',
       format: 'cjs',
       name: 'cjs'
     },
     {
-      file: 'lib/axios-reflash-token.es.js',
+      file: 'dist/axios-reflash-token.es.js',
       format: 'es',
       name: 'es'
     },
     {
-      file: 'lib/axios-reflash-token.umd.js',
+      file: 'dist/axios-reflash-token.umd.js',
       format: 'umd',
       name: 'umd'
     }

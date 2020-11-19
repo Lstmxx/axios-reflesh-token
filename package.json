@@ -1,8 +1,10 @@
 {
-  "name": "@lstmxx/axios-reflesh-token",
-  "version": "1.0.1",
-  "description": "axios reflash token",
-  "main": "index.js",
+  "name": "@lstmxx/axios-refresh-token",
+  "version": "1.0.0",
+  "description": "axios refresh token",
+  "main": "dist/axios-refresh-token.cjs.js",
+  "module": "dist/axios-refresh-token.esm.js",
+  "browser": "dist/axios-refresh-token.umd.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c",
@@ -10,18 +12,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lstmxx/axios-reflesh-token.git"
+    "url": "git+https://github.com/Lstmxx/axios-refresh-token.git"
   },
   "keywords": [
     "axios",
-    "reflesh-token"
+    "refresh-token"
   ],
   "author": "lstmxx",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lstmxx/axios-reflesh-token/issues"
+    "url": "https://github.com/Lstmxx/axios-refresh-token/issues"
   },
-  "homepage": "https://github.com/Lstmxx/axios-reflesh-token#readme",
+  "homepage": "https://github.com/Lstmxx/axios-refresh-token#readme",
   "dependencies": {
     "axios": "^0.21.0",
     "rollup-plugin-eslint": "^7.0.0"
@@ -37,5 +39,9 @@
     "@types/babel__core": "^7.1.9",
     "rollup": "^2.0.0",
     "rollup-plugin-terser": "^7.0.2"
-  }
+  },
+  "files": [
+    "dist",
+    "src"
+  ]
 }
