@@ -3,7 +3,7 @@ import { isFunction } from './util/util'
 import { initAxios } from './core/axios'
 
 const Service = function Service (options) {
-  this.isReflash = false
+  this.isReflesh = false
   this.reTryReqeustList = []
   const config = options.config ? options.config : {}
   const responseInterceptors = options.responseInterceptors
@@ -24,7 +24,7 @@ const Service = function Service (options) {
   }
   axios.interceptors.request.use((_config) => {
     const c = isFunction(requestInterceptors) ? requestInterceptors(_config, getToken) : _config
-    if (this.isReflash) {
+    if (this.isReflesh) {
       console.log('hleo')
     }
     return c
@@ -40,11 +40,11 @@ const Service = function Service (options) {
     return response
   }, async (error) => {
     if (error.response && error.response.status === 401) {
-      if (!this.isReflash) {
-        this.isReflash = true
+      if (!this.isReflesh) {
+        this.isReflesh = true
         try {
           reflashTokenConfig && await _reflashToken()
-          this.isReflash = false
+          this.isReflesh = false
           while (this.reTryReqeustList.length > 0) {
             const cb = this.reTryReqeustList.shift()
             cb()
