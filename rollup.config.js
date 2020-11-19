@@ -1,30 +1,41 @@
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import babel from "rollup-plugin-babel";
-import { terser } from 'rollup-plugin-terser';
-import { eslint } from 'rollup-plugin-eslint';
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import json from '@rollup/plugin-json';
+import babel from '@rollup/plugin-babel';
+import { terser } from 'rollup-plugin-terser'
 
-const isDev = process.env.NODE_ENV !== 'production'
+// const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
   input: 'src/index.js',
-  output: {
-    file: 'bundle.js',
-    format: 'cjs'
-  },
+  output: [
+    {
+      file: 'lib/axios-reflash-token.cjs.js',
+      format: 'cjs',
+      name: 'cjs'
+    },
+    {
+      file: 'lib/axios-reflash-token.es.js',
+      format: 'es',
+      name: 'es'
+    },
+    {
+      file: 'lib/axios-reflash-token.umd.js',
+      format: 'umd',
+      name: 'umd'
+    }
+  ],
   plugins: [
-    resolve(),
+    json(),
+    nodeResolve(),
     commonjs(),
-    eslint({
-      throwOnError: true,
-      throwOnWarning: true,
-      include: ['src/**'],
-      exclude: ['node_modules/**']
-    }),
     babel({
-      exclude: 'node_modules/**', // 防止打包node_modules下的文件
-      runtimeHelpers: true,       // 使plugin-transform-runtime生效
+      babelHelpers: 'runtime',
+      exclude: 'node_modules/**',
+      plugins: [
+        '@babel/plugin-transform-runtime'
+      ]
     }),
-    !isDev && terser()
+    terser()
   ]
 }
