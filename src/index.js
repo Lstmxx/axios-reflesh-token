@@ -3,18 +3,18 @@ import { isFunction } from './util/util'
 import { initAxios } from './core/axios'
 
 const Service = function Service (options) {
-  this.isReflesh = false
+  this.isRefresh = false
   this.reTryReqeustList = []
   const config = options.config ? options.config : {}
   const responseInterceptors = options.responseInterceptors
   const requestInterceptors = options.requestInterceptors
-  const reflashTokenConfig = options.reflashTokenConfig || null
-  const getTokenFn = options.getTokenFn
+  const refreshTokenConfig = options.refreshTokenConfig || null
+  const refreshTokenFn = options.refreshTokenFn
   const axios = initAxios(config)
-  function _reflashToken () {
+  function _refreshToken () {
     return new Promise((resolve, reject) => {
-      axios.request(reflashTokenConfig).then((response) => {
-        const isResolve = getTokenFn(response, setToken)
+      axios.request(refreshTokenConfig).then((response) => {
+        const isResolve = refreshTokenFn(response, setToken)
         if (isResolve) resolve()
         else reject(new Error('get token error'))
       }).catch((err) => {
@@ -24,7 +24,7 @@ const Service = function Service (options) {
   }
   axios.interceptors.request.use((_config) => {
     const c = isFunction(requestInterceptors) ? requestInterceptors(_config, getToken) : _config
-    if (this.isReflesh) {
+    if (this.isRefresh) {
       console.log('hleo')
     }
     return c
@@ -40,11 +40,11 @@ const Service = function Service (options) {
     return response
   }, async (error) => {
     if (error.response && error.response.status === 401) {
-      if (!this.isReflesh) {
-        this.isReflesh = true
+      if (!this.isRefresh) {
+        this.isRefresh = true
         try {
-          reflashTokenConfig && await _reflashToken()
-          this.isReflesh = false
+          refreshTokenConfig && await _refreshToken()
+          this.isRefresh = false
           while (this.reTryReqeustList.length > 0) {
             const cb = this.reTryReqeustList.shift()
             cb()

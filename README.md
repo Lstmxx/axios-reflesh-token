@@ -16,28 +16,24 @@ const options = {
     timeout: 6000
   },
   requestInterceptors: function (config, getToken) {
-    config.headers.Authorization = 'Bearer ' + getToken()
+    // reqeust TODO
     return config
   },
   responseInterceptors: function (response) {
-    const data = response.data
-    const res = {
-      status: data.code || response.status,
-      data,
-      msg: ''
-    }
-    res.msg = data.message || showStatus(res.status)
-    return res
+    // response TODO
+    return response
   },
-  reflashTokenConfig: {
+  // diposed refresh token interface url , method and data
+  refreshTokenConfig: {
     url: '',
     method: '',
     data: {
     }
   },
-  getTokenFn: function (response, setToken) {
+  // use setToken to save token in SessionStorage
+  refreshTokenFn: function (response, setToken) {
     if (response.data.code === 200) {
-      setToken(response.data.data.token, response.data.data.tokenType)
+      setToken(token, 'tokenName')
       return true
     }
     return false

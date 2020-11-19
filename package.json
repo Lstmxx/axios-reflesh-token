@@ -1,6 +1,6 @@
 {
   "name": "@lstmxx/axios-refresh-token",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "axios refresh token",
   "main": "dist/axios-refresh-token.cjs.js",
   "module": "dist/axios-refresh-token.esm.js",
@@ -16,7 +16,8 @@
   },
   "keywords": [
     "axios",
-    "refresh-token"
+    "refresh",
+    "token"
   ],
   "author": "lstmxx",
   "license": "ISC",
